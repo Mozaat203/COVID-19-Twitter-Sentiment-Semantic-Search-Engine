@@ -1,9 +1,49 @@
 # COVID-19-Twitter-Sentiment-Semantic-Search-Engine
 Here we apply different NLP algorithms and different machine/deeplearning models for learning purposes
-When a global crisis hits, social media becomes a real-time gauge of human emotion. This project doesn't just classify tweets as positive, negative, or neutral—it acts as a semantic search engine. By combining NLP classification models with vector similarity search, you can input a thought, predict its sentiment, and immediately retrieve the most semantically similar historical tweets from the early days of the pandemic.The Core FeaturesMulti-Model Sentiment Classification: Predicts the emotional tone of unstructured text using an evolution of models, from lightweight Machine Learning to heavy-duty Deep Learning.Semantic Tweet Recommendation: Uses Cosine Similarity on TF-IDF and Word2Vec embeddings to find tweets with similar meanings, not just matching keywords.Geospatial Data Engineering: Cleans highly unstructured, noisy user-input locations by mapping obscure cities and states to standard country codes using geonamescache, followed by proportional imputation for missing data.Temporal Mood Tracking: Time-series analysis mapping how public sentiment shifted day-by-day during March and April 2020.The Data PipelineRaw Twitter data is notoriously messy. Before any model training could happen, the data underwent a strict preprocessing pipeline:Text Normalization: Lowercasing, removing URLs, stripping @mentions, and filtering out NLTK stopwords.Location Standardization: Parsed unstructured strings (e.g., "City of London", "Silicon Valley", "Planet Earth") and mapped them to standardized country names to enable accurate geographical EDA.Proportional Imputation: Filled missing geographical data by mimicking the existing probability distribution of the top 50 countries, ensuring statistical integrity without skewing the data.Model Architecture & EvolutionThis project takes an iterative approach to NLP, building from classical ML baselines up to Bidirectional Neural Networks.Model VersionText RepresentationClassifier EngineBest ForModel 1TF-IDF VectorizerLinear SVCFast, highly interpretable baseline with keyword-based similarity.Model 2Pre-trained GloVe (100d)Bidirectional LSTMUnderstanding complex linguistic context and sequences.Model 3Custom Word2VecLogistic RegressionLightweight semantic averaging with custom-trained embeddings.Model 4Custom Word2VecFine-Tuned Bi-LSTMCapturing deep temporal dependencies using custom vocabulary constraints.🛠️ Tech StackData Processing: Pandas, NumPy, GeonamescacheNLP Processing: NLTK, Gensim (Word2Vec)Machine Learning: Scikit-Learn (TF-IDF, LinearSVC, Logistic Regression)Deep Learning: TensorFlow / Keras (Bidirectional LSTM, Custom Embeddings)Visualization: Matplotlib, SeabornHow to Run the Project1. Install DependenciesEnsure you have the required libraries installed:Bashpip install pandas numpy nltk matplotlib seaborn scikit-learn tensorflow gensim geonamescache
-2. Download NLTK StopwordsIf you haven't used NLTK before, you will need to download the stopwords corpus:Pythonimport nltk
+
+When a global crisis hits, social media becomes a real-time gauge of human emotion. This project goes beyond basic classification—it acts as an end-to-end semantic search engine. By combining NLP classification models with vector similarity search, you can input a thought, predict its sentiment, and immediately retrieve the most semantically similar historical tweets from the early days of the pandemic.
+
+---
+
+## 🚀 Core Engineering Contributions (CV Highlights)
+
+*   **Geospatial Data Engineering:** Cleansed and standardized highly unstructured location strings using `geonamescache`; implemented a distributed random imputation strategy matching the original top-50 country probability distribution to handle missing values without skewing metrics.
+*   **Pipeline Development:** Built comprehensive text preprocessing pipelines handling lowercase normalization, URL/mention removal, and NLTK stopword filtering to isolate core vocabulary.
+*   **Iterative Architecture:** Engineered and evaluated four separate NLP systems, scaling from baseline statistical classifiers (TF-IDF + Linear SVC) to Deep Learning sequence architectures (Word2Vec/GloVe embedded Bidirectional LSTMs).
+*   **Multi-Modal Inference:** Designed an end-to-end inference framework matching sentiment classification predictions with custom Word2Vec vector similarity scoring to recommend contextually related historical tweets.
+
+---
+
+## 📊 Model Architecture & Evolution
+
+This project takes an iterative approach to NLP, building from classical ML baselines up to Bidirectional Neural Networks to systematically break through accuracy limits.
+
+| Model Version | Text Representation | Classifier Engine | Best For |
+| :--- | :--- | :--- | :--- |
+| **Model 1** | TF-IDF Vectorizer | Linear SVC | Fast, highly interpretable baseline with keyword-based similarity. |
+| **Model 2** | Pre-trained GloVe (100d) | Bidirectional LSTM | Understanding complex linguistic context and sequences. |
+| **Model 3** | Custom Word2Vec | Logistic Regression | Lightweight semantic averaging with custom-trained embeddings. |
+| **Model 4** | Custom Word2Vec | Fine-Tuned Bi-LSTM | Capturing deep temporal dependencies using custom vocabulary constraints. |
+
+---
+
+## 🛠️ Tech Stack
+
+*   **Data Processing & EDA:** Pandas, NumPy, Geonamescache, Matplotlib, Seaborn
+*   **Machine Learning:** Scikit-Learn (TF-IDF, LinearSVC, Logistic Regression)
+*   **Deep Learning & NLP:** TensorFlow / Keras (Bidirectional LSTM), Gensim (Word2Vec), NLTK
+
+---
+
+## ⚙️ How to Run the Inference Engine
+
+**1. Install Dependencies**
+```bash
+pip install pandas numpy nltk matplotlib seaborn scikit-learn tensorflow gensim geonamescache
+
+import nltk
 nltk.download('stopwords')
-3. Run the Inference EngineLoad up Model 4 (or any of the saved .pkl / .keras files) to test the predict_and_recommend() function.Python# Example Usage
+
+# Example Usage
 user_input = "The supermarket shelves are completely empty, this is scary."
 predict_and_recommend(user_input, num_similar=3)
-Example Output:Predicted Sentiment: Negative (92.40% confidence)Top Similar Tweets:[Score: 0.8912] "Went to the grocery store today and there is absolutely no food left on the shelves."[Score: 0.8430] "Panic buying is leaving our local supermarkets completely empty..."
