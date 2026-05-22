@@ -65,10 +65,10 @@ streamlit run app.py
 ```
 **4. Using the App
 
-    Navigate via the sidebar to explore the dataset in the Overview tab.
+   *- Navigate via the sidebar to explore the dataset in the Overview tab.
 
-    Check out the EDA tab for data distribution and Word Clouds.
+   - Check out the EDA tab for data distribution and Word Clouds.
 
-    Go to Prediction to test the Bi-LSTM model with your own sentences.
+   - Go to Prediction to test the Bi-LSTM model with your own sentences.
 
-    Use Semantic Search to query the historical database for similar tweets.
+   - Use Semantic Search to query the historical database for similar tweets.
