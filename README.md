@@ -47,3 +47,16 @@ nltk.download('stopwords')
 # Example Usage
 user_input = "The supermarket shelves are completely empty, this is scary."
 predict_and_recommend(user_input, num_similar=3)
+2. Download NLTK Stopwords
+Python
+
+import nltk
+nltk.download('stopwords')
+
+3. Run Predictions & Recommendations
+Load up your saved models and call the inference pipeline:
+Python
+
+# Example Usage
+user_input = "The supermarket shelves are completely empty, this is scary."
+predict_and_recommend(user_input, num_similar=3)
